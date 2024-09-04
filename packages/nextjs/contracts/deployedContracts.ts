@@ -4,6 +4,339 @@
  */
 import { GenericContractsDeclaration } from "~~/utils/scaffold-eth/contract";
 
-const deployedContracts = {} as const;
+const deployedContracts = {
+  31337: {
+    Cuchulink: {
+      address: "0xCf7Ed3AccA5a467e9e704C703E8D87F634fB0Fc9",
+      abi: [
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "string",
+              name: "nombre",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "montoPorRonda",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "fechaInicio",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "numParticipantes",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "creador",
+              type: "address",
+            },
+          ],
+          name: "CuchubalCreated",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "participant",
+              type: "address",
+            },
+          ],
+          name: "ParticipantJoined",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "participant",
+              type: "address",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "amount",
+              type: "uint256",
+            },
+          ],
+          name: "PaymentMade",
+          type: "event",
+        },
+        {
+          anonymous: false,
+          inputs: [
+            {
+              indexed: false,
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+            {
+              indexed: false,
+              internalType: "uint256",
+              name: "rondaActual",
+              type: "uint256",
+            },
+            {
+              indexed: false,
+              internalType: "address",
+              name: "winner",
+              type: "address",
+            },
+          ],
+          name: "RoundCompleted",
+          type: "event",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "nombre",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "montoPorRonda",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "fechaInicio",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "numParticipantes",
+              type: "uint256",
+            },
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "createCuchubal",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "getCuchubalInfo",
+          outputs: [
+            {
+              internalType: "string",
+              name: "nombre",
+              type: "string",
+            },
+            {
+              internalType: "uint256",
+              name: "montoPorRonda",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "fechaInicio",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "fechaFinalizacion",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "numParticipantes",
+              type: "uint256",
+            },
+            {
+              internalType: "uint256",
+              name: "rondaActual",
+              type: "uint256",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "address",
+              name: "creator",
+              type: "address",
+            },
+          ],
+          name: "getCuchubalesByCreator",
+          outputs: [
+            {
+              internalType: "string[]",
+              name: "",
+              type: "string[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "getParticipants",
+          outputs: [
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+            {
+              components: [
+                {
+                  internalType: "bool",
+                  name: "hasPaid",
+                  type: "bool",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalPaid",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct Cuchulink.Participant[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "getParticipantsPaid",
+          outputs: [
+            {
+              internalType: "address[]",
+              name: "",
+              type: "address[]",
+            },
+            {
+              components: [
+                {
+                  internalType: "bool",
+                  name: "hasPaid",
+                  type: "bool",
+                },
+                {
+                  internalType: "uint256",
+                  name: "totalPaid",
+                  type: "uint256",
+                },
+              ],
+              internalType: "struct Cuchulink.Participant[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "getRoundHistory",
+          outputs: [
+            {
+              components: [
+                {
+                  internalType: "address",
+                  name: "winner",
+                  type: "address",
+                },
+                {
+                  internalType: "bool",
+                  name: "hasWinner",
+                  type: "bool",
+                },
+              ],
+              internalType: "struct Cuchulink.Round[]",
+              name: "",
+              type: "tuple[]",
+            },
+          ],
+          stateMutability: "view",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "joinCuchubal",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+      ],
+      inheritedFunctions: {},
+    },
+  },
+} as const;
 
 export default deployedContracts satisfies GenericContractsDeclaration;
