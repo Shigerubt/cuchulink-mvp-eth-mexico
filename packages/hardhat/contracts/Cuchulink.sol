@@ -22,7 +22,7 @@ contract Cuchulink {
 		uint256 participantesPagados;
 		mapping(address => Participant) participants;
 		mapping(uint256 => Round) rounds; // Historial de rondas
-		mapping(uint256 => address) participantIndex; // Almacenar participantes con índices
+		mapping(uint256 => address) participantIndex;
 	}
 
 	mapping(string => Cuchubal) private cuchubales;
