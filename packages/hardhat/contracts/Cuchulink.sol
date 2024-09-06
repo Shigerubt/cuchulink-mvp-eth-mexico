@@ -16,7 +16,7 @@ contract Cuchulink {
 
     struct Cuchubal {
         string nombre;
-        uint256 montoPorRonda; // Monto en Wei
+        uint256 montoPorRonda; 
         uint256 numParticipantes;
         uint256 rondaActual;
         uint256 participantesPagados;
