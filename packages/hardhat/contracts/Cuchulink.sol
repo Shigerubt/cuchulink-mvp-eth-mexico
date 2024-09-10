@@ -22,6 +22,7 @@ contract Cuchulink {
         uint256 participantesPagados;
         uint256 participantesRegistrados;
         bool exists;
+        bool finished;
         mapping(address => Participant) participants;
         mapping(uint256 => Round) rounds; // Historial de rondas
         mapping(uint256 => address) participantIndex;
@@ -63,6 +64,7 @@ contract Cuchulink {
         Cuchubal storage newCuchubal = cuchubales[codigo];
         newCuchubal.nombre = nombre;
         newCuchubal.exists = true;
+        newCuchubal.finished = false;
         newCuchubal.montoPorRonda = montoPorRonda;
         newCuchubal.numParticipantes = numParticipantes;
         newCuchubal.rondaActual = 1;
@@ -148,6 +150,9 @@ contract Cuchulink {
                 cuchubal.rondaActual++;
                 cuchubal.participantesPagados = 0;
             }
+            else {
+                cuchubal.finished = true;
+            }       
         }
     }
 
@@ -162,7 +167,8 @@ contract Cuchulink {
             string memory nombre,
             uint256 montoPorRonda,
             uint256 numParticipantes,
-            uint256 rondaActual
+            uint256 rondaActual,
+            bool finished
         )
     {
         Cuchubal storage cuchubal = cuchubales[codigo];
@@ -170,7 +176,8 @@ contract Cuchulink {
             cuchubal.nombre,
             cuchubal.montoPorRonda,
             cuchubal.numParticipantes,
-            cuchubal.rondaActual
+            cuchubal.rondaActual,
+            cuchubal.finished
         );
     }
 
