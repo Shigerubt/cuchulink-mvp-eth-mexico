@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Link from "next/link";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
 import { parseEther } from "viem";
@@ -14,7 +15,7 @@ const Search: NextPage = () => {
     },
   });
 
-  const { data: cuchubalInfo, isLoading: isLoadingChubalInfo } = useScaffoldReadContract({
+  const { data: cuchubalInfo, isLoading: isLoadingCuchubalInfo } = useScaffoldReadContract({
     contractName: "Cuchulink",
     functionName: "getCuchubalInfo",
     args: [search],
@@ -50,21 +51,18 @@ const Search: NextPage = () => {
       </form>
 
       {search &&
-        (isLoadingChubalInfo ? (
+        (isLoadingCuchubalInfo ? (
           "Espera"
         ) : (
           <div className="border w-[800px] p-4 rounded bg-slate-50" key={cuchubalInfo?.[0]}>
             <p>Nombre de Cuchubal: {cuchubalInfo?.[0]}</p>
             <p>Monto por Ronda: {parseEther(String(Number(cuchubalInfo?.[1])))} ETH</p>
             <p>Número Máximo de Participantes: {Number(cuchubalInfo?.[4])}</p>
-            <button
-              onClick={() => {
-                console.log("Inicio");
-              }}
-              className="p-4 bg-blue-500 rounded"
-            >
-              Unirse
-            </button>
+            <p>Ronda Actual: {Number(cuchubalInfo?.[5])}</p>
+
+            <Link href={`/cuchubal/${search}`} className="p-4 bg-blue-500 rounded">
+              Ver Cuchubal
+            </Link>
           </div>
         ))}
     </div>
