@@ -176,14 +176,12 @@ contract Cuchulink {
 
             address winner = selectWinner(cuchubal);
 
-            // Transferir al ganador
             (bool success,) = payable(winner).call{value: totalAmount}("");
             require(success, "Transfer failed.");
 
             cuchubal.rounds[cuchubal.rondaActual] = Round({winner: winner, hasWinner: true});
             emit RoundCompleted(codigo, cuchubal.rondaActual, winner);
 
-            // Restablecer pagos para la siguiente ronda
             for (uint256 i = 1; i <= cuchubal.numParticipantes; i++) {
                 address participantAddr = cuchubal.participantIndex[i];
                 cuchubal.participants[participantAddr].hasPaid = false;
