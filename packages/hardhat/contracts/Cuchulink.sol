@@ -169,43 +169,64 @@ contract Cuchulink {
 	}
 
 	function distributePayment(string memory codigo) private {
-		Cuchubal storage cuchubal = cuchubales[codigo];
-		uint256 totalAmount = cuchubal.montoPorRonda *
-			cuchubal.numParticipantes;
+        Cuchubal storage cuchubal = cuchubales[codigo];
+        uint256 totalAmount = cuchubal.montoPorRonda * cuchubal.numParticipantes;
 
-		// Seleccionar ganador
-		if (cuchubal.participantesPagados == cuchubal.numParticipantes) {
-			uint256 randIndex = uint256(
-				keccak256(abi.encodePacked(block.timestamp, block.difficulty))
-			) % cuchubal.numParticipantes;
-			address winner = cuchubal.participantIndex[randIndex + 1]; // Índice comienza en 1
+        if (cuchubal.participantesPagados == cuchubal.numParticipantes) {
 
-			// Transferir al ganador
-			(bool success, ) = payable(winner).call{ value: totalAmount }("");
-			require(success, "Transfer failed.");
+            address winner = selectWinner(cuchubal);
 
-			cuchubal.rounds[cuchubal.rondaActual] = Round({
-				winner: winner,
-				hasWinner: true
-			});
-			emit RoundCompleted(codigo, cuchubal.rondaActual, winner);
+            // Transferir al ganador
+            (bool success,) = payable(winner).call{value: totalAmount}("");
+            require(success, "Transfer failed.");
 
-			// Restablecer pagos para la siguiente ronda
-			for (uint256 i = 1; i <= cuchubal.numParticipantes; i++) {
-				address participantAddr = cuchubal.participantIndex[i];
-				cuchubal.participants[participantAddr].hasPaid = false;
-			}
+            cuchubal.rounds[cuchubal.rondaActual] = Round({winner: winner, hasWinner: true});
+            emit RoundCompleted(codigo, cuchubal.rondaActual, winner);
 
-			cuchubal.participantesPagados = 0;
+            // Restablecer pagos para la siguiente ronda
+            for (uint256 i = 1; i <= cuchubal.numParticipantes; i++) {
+                address participantAddr = cuchubal.participantIndex[i];
+                cuchubal.participants[participantAddr].hasPaid = false;
+            }
 
-			if (cuchubal.rondaActual < cuchubal.numParticipantes) {
-				cuchubal.rondaActual++;
-				cuchubal.participantesPagados = 0;
-			} else {
-				cuchubal.finished = true;
-			}
-		}
-	}
+            cuchubal.participantesPagados = 0;
+
+            if (cuchubal.rondaActual < cuchubal.numParticipantes) {
+                cuchubal.rondaActual++;
+            } else {
+                cuchubal.finished = true;
+            }
+        }
+    }
+
+
+    function hasParticipantWonBefore(Cuchubal storage cuchubal, address participant) private view returns (bool) {
+        for (uint256 i = 1; i < cuchubal.rondaActual; i++) {
+            if (cuchubal.rounds[i].winner == participant) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    function selectWinner(Cuchubal storage cuchubal) private view returns (address) {
+        bool winnerFound = false;
+        address winner;
+
+        while (!winnerFound) {
+            // Seleccionar un ganador aleatorio
+            uint256 randIndex =
+                uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty))) % cuchubal.numParticipantes;
+            address potentialWinner = cuchubal.participantIndex[randIndex + 1]; 
+
+            if (!hasParticipantWonBefore(cuchubal, potentialWinner)) {
+                winner = potentialWinner;
+                winnerFound = true;
+            }
+        }
+
+        return winner;
+    }
 
 	function getCuchubalesByCreator(
 		address creator
