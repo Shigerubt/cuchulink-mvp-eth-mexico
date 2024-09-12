@@ -4,7 +4,6 @@ import { useState } from "react";
 import Link from "next/link";
 import { NextPage } from "next";
 import { useForm } from "react-hook-form";
-import { parseEther } from "viem";
 import { useScaffoldReadContract } from "~~/hooks/scaffold-eth";
 
 const Search: NextPage = () => {
@@ -18,6 +17,12 @@ const Search: NextPage = () => {
   const { data: cuchubalInfo, isLoading: isLoadingCuchubalInfo } = useScaffoldReadContract({
     contractName: "Cuchulink",
     functionName: "getCuchubalInfo",
+    args: [search],
+  });
+
+  const { data: participantsJoined, isLoading: isLoadingGetParticipants } = useScaffoldReadContract({
+    contractName: "Cuchulink",
+    functionName: "getParticipants",
     args: [search],
   });
 
@@ -56,9 +61,16 @@ const Search: NextPage = () => {
         ) : (
           <div className="border w-[800px] p-4 rounded bg-slate-50" key={cuchubalInfo?.[0]}>
             <p>Nombre de Cuchubal: {cuchubalInfo?.[0]}</p>
-            <p>Monto por Ronda: {parseEther(String(Number(cuchubalInfo?.[1])))} ETH</p>
-            <p>Número Máximo de Participantes: {Number(cuchubalInfo?.[4])}</p>
-            <p>Ronda Actual: {Number(cuchubalInfo?.[5])}</p>
+            <p>Monto por Ronda: {Number(cuchubalInfo?.[1]) / 10 ** 18} ETH</p>
+            <p>Número Máximo de Participantes: {Number(cuchubalInfo?.[2])}</p>
+            <p>
+              Número Actual de Participantes:{" "}
+              {isLoadingGetParticipants ||
+                participantsJoined?.[0].filter(
+                  participant => participant != "0x0000000000000000000000000000000000000000",
+                ).length}
+            </p>
+            <p>Ronda Actual: {Number(cuchubalInfo?.[3])}</p>
 
             <Link href={`/cuchubal/${search}`} className="p-4 bg-blue-500 rounded">
               Ver Cuchubal

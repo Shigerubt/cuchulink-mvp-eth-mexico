@@ -33,12 +33,6 @@ const deployedContracts = {
             {
               indexed: false,
               internalType: "uint256",
-              name: "fechaInicio",
-              type: "uint256",
-            },
-            {
-              indexed: false,
-              internalType: "uint256",
               name: "numParticipantes",
               type: "uint256",
             },
@@ -135,11 +129,6 @@ const deployedContracts = {
             },
             {
               internalType: "uint256",
-              name: "fechaInicio",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
               name: "numParticipantes",
               type: "uint256",
             },
@@ -172,16 +161,6 @@ const deployedContracts = {
             {
               internalType: "uint256",
               name: "montoPorRonda",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "fechaInicio",
-              type: "uint256",
-            },
-            {
-              internalType: "uint256",
-              name: "fechaFinalizacion",
               type: "uint256",
             },
             {
@@ -244,6 +223,11 @@ const deployedContracts = {
                   name: "totalPaid",
                   type: "uint256",
                 },
+                {
+                  internalType: "bool",
+                  name: "hasJoined",
+                  type: "bool",
+                },
               ],
               internalType: "struct Cuchulink.Participant[]",
               name: "",
@@ -279,6 +263,11 @@ const deployedContracts = {
                   internalType: "uint256",
                   name: "totalPaid",
                   type: "uint256",
+                },
+                {
+                  internalType: "bool",
+                  name: "hasJoined",
+                  type: "bool",
                 },
               ],
               internalType: "struct Cuchulink.Participant[]",
@@ -329,6 +318,19 @@ const deployedContracts = {
             },
           ],
           name: "joinCuchubal",
+          outputs: [],
+          stateMutability: "payable",
+          type: "function",
+        },
+        {
+          inputs: [
+            {
+              internalType: "string",
+              name: "codigo",
+              type: "string",
+            },
+          ],
+          name: "payForNextRound",
           outputs: [],
           stateMutability: "payable",
           type: "function",

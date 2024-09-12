@@ -35,7 +35,6 @@ const Create: NextPage = () => {
                     args: [
                       data.nombre,
                       BigInt(Math.round(Number(data.montoPorRonda) * 10 ** 18)),
-                      BigInt(data.fechaInicio),
                       BigInt(data.numParticipantes),
                       data.codigo,
                     ],
