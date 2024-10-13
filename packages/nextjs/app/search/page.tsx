@@ -27,8 +27,8 @@ const Search: NextPage = () => {
   });
 
   return (
-    <div className="flex items-center flex-col flex-grow p-8 pt-10">
-      <h2 className="text-4xl">Unirse a un Cuchubal</h2>
+    <div className="flex items-center flex-col flex-grow p-8 pt-10 bg-gray-50 min-h-screen">
+      <h2 className="text-4xl font-semibold text-gray-800 mb-6">Unirse a un Cuchubal</h2>
 
       <form
         onSubmit={handleSubmit(async data => {
@@ -41,38 +41,60 @@ const Search: NextPage = () => {
             console.log(e);
           }
         })}
-        className="flex flex-row flex-wrap justify-between w-[600px] gap-2 border p-4 rounded bg-slate-100"
+        className="flex flex-row flex-wrap justify-between w-[600px] gap-2 border p-4 rounded-lg bg-white shadow-md"
       >
         <div className="flex flex-col w-full gap-4">
-          <label htmlFor="startDate" className="text-2xl">
+          <label htmlFor="codigo" className="text-2xl text-gray-700">
             Código de Invitación
           </label>
-          <input type="text" {...register("codigo")} placeholder="Escriba su Código de Cuchubal" />
+          <input
+            type="text"
+            {...register("codigo")}
+            placeholder="Escriba su Código de Cuchubal"
+            className="border border-gray-300 bg-gray-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            required
+          />
         </div>
 
-        <button type="submit" className="d-block w-full">
+        <button
+          type="submit"
+          className="d-block w-full mt-4 bg-blue-600 text-white font-semibold py-2 rounded-lg transition duration-200 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        >
           Buscar Cuchubal
         </button>
       </form>
 
       {search &&
         (isLoadingCuchubalInfo ? (
-          "Espera"
+          <p className="mt-4 text-gray-600">Espera...</p>
         ) : (
-          <div className="border w-[800px] p-4 rounded bg-slate-50" key={cuchubalInfo?.[0]}>
-            <p>Nombre de Cuchubal: {cuchubalInfo?.[0]}</p>
-            <p>Monto por Ronda: {Number(cuchubalInfo?.[1]) / 10 ** 18} ETH</p>
-            <p>Número Máximo de Participantes: {Number(cuchubalInfo?.[2])}</p>
-            <p>
-              Número Actual de Participantes:{" "}
-              {isLoadingGetParticipants ||
-                participantsJoined?.[0].filter(
-                  participant => participant != "0x0000000000000000000000000000000000000000",
-                ).length}
+          <div className="border w-[800px] p-4 rounded-lg bg-white shadow-md mt-4" key={cuchubalInfo?.[0]}>
+            <p className="text-gray-800">
+              Nombre de Cuchubal: <span className="font-semibold">{cuchubalInfo?.[0]}</span>
             </p>
-            <p>Ronda Actual: {Number(cuchubalInfo?.[3])}</p>
+            <p className="text-gray-800">
+              Monto por Ronda: <span className="font-semibold">{Number(cuchubalInfo?.[1]) / 10 ** 18} ETH</span>
+            </p>
+            <p className="text-gray-800">
+              Número Máximo de Participantes: <span className="font-semibold">{Number(cuchubalInfo?.[2])}</span>
+            </p>
+            <p className="text-gray-800">
+              Número Actual de Participantes:{" "}
+              <span className="font-semibold">
+                {isLoadingGetParticipants ||
+                  participantsJoined?.[0].filter(
+                    participant => participant !== "0x0000000000000000000000000000000000000000",
+                  ).length}
+              </span>
+            </p>
+            <p className="text-gray-800">
+              Ronda Actual: <span className="font-semibold">{Number(cuchubalInfo?.[3])}</span>
+            </p>
 
-            <Link href={`/cuchubal/${search}`} className="p-4 bg-blue-500 rounded">
+            <Link
+              href={`/cuchubal/${search}`}
+              className="mt-4 p-4 bg-blue-500 text-white rounded-lg transition duration-200 hover:bg-blue-600"
+            >
               Ver Cuchubal
             </Link>
           </div>

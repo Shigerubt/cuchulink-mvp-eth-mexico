@@ -35,6 +35,7 @@
     "verify": "yarn workspace @se-2/hardhat verify"
   },
   "devDependencies": {
+    "hardhat": "^2.22.13",
     "husky": "~8.0.3",
     "lint-staged": "~13.2.2"
   },

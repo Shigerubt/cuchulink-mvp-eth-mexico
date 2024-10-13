@@ -1,0 +1,605 @@
+{
+  "address": "0x47216272cC806D18F1E96dF02e9499430FBA84A2",
+  "abi": [
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "nombre",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "montoPorRonda",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "numParticipantes",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "creador",
+          "type": "address"
+        }
+      ],
+      "name": "CuchubalCreated",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "participant",
+          "type": "address"
+        }
+      ],
+      "name": "ParticipantJoined",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "participant",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "amount",
+          "type": "uint256"
+        }
+      ],
+      "name": "PaymentMade",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": false,
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "rondaActual",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "address",
+          "name": "winner",
+          "type": "address"
+        }
+      ],
+      "name": "RoundCompleted",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "nombre",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "montoPorRonda",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "numParticipantes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "createCuchubal",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "getCuchubalInfo",
+      "outputs": [
+        {
+          "internalType": "string",
+          "name": "nombre",
+          "type": "string"
+        },
+        {
+          "internalType": "uint256",
+          "name": "montoPorRonda",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "numParticipantes",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "rondaActual",
+          "type": "uint256"
+        },
+        {
+          "internalType": "bool",
+          "name": "finished",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "creator",
+          "type": "address"
+        }
+      ],
+      "name": "getCuchubalesByCreator",
+      "outputs": [
+        {
+          "internalType": "string[]",
+          "name": "",
+          "type": "string[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "getParticipants",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "hasPaid",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPaid",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "hasJoined",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct Cuchulink.Participant[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "getParticipantsPaid",
+      "outputs": [
+        {
+          "internalType": "address[]",
+          "name": "",
+          "type": "address[]"
+        },
+        {
+          "components": [
+            {
+              "internalType": "bool",
+              "name": "hasPaid",
+              "type": "bool"
+            },
+            {
+              "internalType": "uint256",
+              "name": "totalPaid",
+              "type": "uint256"
+            },
+            {
+              "internalType": "bool",
+              "name": "hasJoined",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct Cuchulink.Participant[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "getRoundHistory",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "winner",
+              "type": "address"
+            },
+            {
+              "internalType": "bool",
+              "name": "hasWinner",
+              "type": "bool"
+            }
+          ],
+          "internalType": "struct Cuchulink.Round[]",
+          "name": "",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "joinCuchubal",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "string",
+          "name": "codigo",
+          "type": "string"
+        }
+      ],
+      "name": "payForNextRound",
+      "outputs": [],
+      "stateMutability": "payable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0x09fd16d44f5e24b213f3ae9ed8bdfa64ad1961211f379f82cf85b714c533f84d",
+  "receipt": {
+    "to": null,
+    "from": "0xf39Fd6e51aad88F6F4ce6aB8827279cffFb92266",
+    "contractAddress": "0x47216272cC806D18F1E96dF02e9499430FBA84A2",
+    "transactionIndex": 19,
+    "gasUsed": "1432423",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0xae4479d78df98185c3b983cffc530fcec908fa9fbe0322a35fc9d68249f41a4f",
+    "transactionHash": "0x09fd16d44f5e24b213f3ae9ed8bdfa64ad1961211f379f82cf85b714c533f84d",
+    "logs": [],
+    "blockNumber": 16538478,
+    "cumulativeGasUsed": "5827772",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [],
+  "numDeployments": 1,
+  "solcInputHash": "26d70f93ef0db8d49d5f07456544fd2c",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.17+commit.8df45f5f\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"string\",\"name\":\"nombre\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"montoPorRonda\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"numParticipantes\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"creador\",\"type\":\"address\"}],\"name\":\"CuchubalCreated\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"}],\"name\":\"ParticipantJoined\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"participant\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"amount\",\"type\":\"uint256\"}],\"name\":\"PaymentMade\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":false,\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"rondaActual\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"}],\"name\":\"RoundCompleted\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"nombre\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"montoPorRonda\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"numParticipantes\",\"type\":\"uint256\"},{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"createCuchubal\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"getCuchubalInfo\",\"outputs\":[{\"internalType\":\"string\",\"name\":\"nombre\",\"type\":\"string\"},{\"internalType\":\"uint256\",\"name\":\"montoPorRonda\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"numParticipantes\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"rondaActual\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"finished\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"creator\",\"type\":\"address\"}],\"name\":\"getCuchubalesByCreator\",\"outputs\":[{\"internalType\":\"string[]\",\"name\":\"\",\"type\":\"string[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"getParticipants\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"},{\"components\":[{\"internalType\":\"bool\",\"name\":\"hasPaid\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"totalPaid\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"hasJoined\",\"type\":\"bool\"}],\"internalType\":\"struct Cuchulink.Participant[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"getParticipantsPaid\",\"outputs\":[{\"internalType\":\"address[]\",\"name\":\"\",\"type\":\"address[]\"},{\"components\":[{\"internalType\":\"bool\",\"name\":\"hasPaid\",\"type\":\"bool\"},{\"internalType\":\"uint256\",\"name\":\"totalPaid\",\"type\":\"uint256\"},{\"internalType\":\"bool\",\"name\":\"hasJoined\",\"type\":\"bool\"}],\"internalType\":\"struct Cuchulink.Participant[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"getRoundHistory\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"winner\",\"type\":\"address\"},{\"internalType\":\"bool\",\"name\":\"hasWinner\",\"type\":\"bool\"}],\"internalType\":\"struct Cuchulink.Round[]\",\"name\":\"\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"joinCuchubal\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"string\",\"name\":\"codigo\",\"type\":\"string\"}],\"name\":\"payForNextRound\",\"outputs\":[],\"stateMutability\":\"payable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{},\"version\":1}},\"settings\":{\"compilationTarget\":{\"contracts/Cuchulink.sol\":\"Cuchulink\"},\"evmVersion\":\"london\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":200},\"remappings\":[]},\"sources\":{\"contracts/Cuchulink.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\r\\npragma solidity ^0.8.0;\\r\\n\\r\\ncontract Cuchulink {\\r\\n\\tstruct Participant {\\r\\n\\t\\tbool hasPaid;\\r\\n\\t\\tuint256 totalPaid;\\r\\n\\t\\tbool hasJoined;\\r\\n\\t}\\r\\n\\r\\n\\tstruct Round {\\r\\n\\t\\taddress winner;\\r\\n\\t\\tbool hasWinner;\\r\\n\\t}\\r\\n\\r\\n\\tstruct Cuchubal {\\r\\n\\t\\tstring nombre;\\r\\n\\t\\tuint256 montoPorRonda; // Monto en Wei\\r\\n\\t\\tuint256 numParticipantes;\\r\\n\\t\\tuint256 rondaActual;\\r\\n\\t\\tuint256 participantesPagados;\\r\\n\\t\\tuint256 participantesRegistrados;\\r\\n\\t\\tbool exists;\\r\\n\\t\\tbool finished;\\r\\n\\t\\tmapping(address => Participant) participants;\\r\\n\\t\\tmapping(uint256 => Round) rounds; // Historial de rondas\\r\\n\\t\\tmapping(uint256 => address) participantIndex;\\r\\n\\t}\\r\\n\\r\\n\\tmapping(string => Cuchubal) private cuchubales;\\r\\n\\tmapping(address => string[]) private creatorToCuchubales;\\r\\n\\r\\n\\tevent CuchubalCreated(\\r\\n\\t\\tstring codigo,\\r\\n\\t\\tstring nombre,\\r\\n\\t\\tuint256 montoPorRonda,\\r\\n\\t\\tuint256 numParticipantes,\\r\\n\\t\\taddress creador\\r\\n\\t);\\r\\n\\tevent ParticipantJoined(string codigo, address participant);\\r\\n\\tevent PaymentMade(string codigo, address participant, uint256 amount);\\r\\n\\tevent RoundCompleted(string codigo, uint256 rondaActual, address winner);\\r\\n\\r\\n\\tmodifier onlyCreator(string memory codigo) {\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tcuchubales[codigo].participants[msg.sender].hasPaid,\\r\\n\\t\\t\\t\\\"Only creator can call this function\\\"\\r\\n\\t\\t);\\r\\n\\t\\t_;\\r\\n\\t}\\r\\n\\r\\n\\tmodifier onlyParticipant(string memory codigo) {\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tcuchubales[codigo].participants[msg.sender].hasPaid,\\r\\n\\t\\t\\t\\\"Only participants can call this function\\\"\\r\\n\\t\\t);\\r\\n\\t\\t_;\\r\\n\\t}\\r\\n\\r\\n\\tfunction createCuchubal(\\r\\n\\t\\tstring memory nombre,\\r\\n\\t\\tuint256 montoPorRonda, // En Wei\\r\\n\\t\\tuint256 numParticipantes,\\r\\n\\t\\tstring memory codigo\\r\\n\\t) public payable {\\r\\n\\t\\trequire(\\r\\n\\t\\t\\t!cuchubales[codigo].exists,\\r\\n\\t\\t\\t\\\"Cuchubal with this code already exists\\\"\\r\\n\\t\\t);\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tmsg.value == montoPorRonda,\\r\\n\\t\\t\\t\\\"Initial payment must be equal to montoPorRonda\\\"\\r\\n\\t\\t);\\r\\n\\r\\n\\t\\tCuchubal storage newCuchubal = cuchubales[codigo];\\r\\n\\t\\tnewCuchubal.nombre = nombre;\\r\\n\\t\\tnewCuchubal.exists = true;\\r\\n\\t\\tnewCuchubal.finished = false;\\r\\n\\t\\tnewCuchubal.montoPorRonda = montoPorRonda;\\r\\n\\t\\tnewCuchubal.numParticipantes = numParticipantes;\\r\\n\\t\\tnewCuchubal.rondaActual = 1;\\r\\n\\t\\tnewCuchubal.participantesPagados = 1;\\r\\n\\t\\tnewCuchubal.participants[msg.sender] = Participant({\\r\\n\\t\\t\\thasPaid: true,\\r\\n\\t\\t\\thasJoined: true,\\r\\n\\t\\t\\ttotalPaid: msg.value\\r\\n\\t\\t});\\r\\n\\t\\tnewCuchubal.rounds[newCuchubal.rondaActual] = Round({\\r\\n\\t\\t\\twinner: address(0),\\r\\n\\t\\t\\thasWinner: false\\r\\n\\t\\t});\\r\\n\\t\\tnewCuchubal.participantIndex[newCuchubal.participantesPagados] = msg\\r\\n\\t\\t\\t.sender;\\r\\n\\r\\n\\t\\tcreatorToCuchubales[msg.sender].push(codigo);\\r\\n\\r\\n\\t\\temit CuchubalCreated(\\r\\n\\t\\t\\tcodigo,\\r\\n\\t\\t\\tnombre,\\r\\n\\t\\t\\tmontoPorRonda,\\r\\n\\t\\t\\tnumParticipantes,\\r\\n\\t\\t\\tmsg.sender\\r\\n\\t\\t);\\r\\n\\t\\temit PaymentMade(codigo, msg.sender, msg.value);\\r\\n\\t}\\r\\n\\r\\n\\tfunction joinCuchubal(string memory codigo) public payable {\\r\\n\\t\\tCuchubal storage cuchubal = cuchubales[codigo];\\r\\n\\t\\t//require(cuchubal.fechaInicio != 0, \\\"Cuchubal not found\\\");\\r\\n\\r\\n\\t\\tParticipant storage participant = cuchubal.participants[msg.sender];\\r\\n\\t\\trequire(\\r\\n\\t\\t\\t!participant.hasJoined,\\r\\n\\t\\t\\t\\\"You are already registered in this Cuchubal\\\"\\r\\n\\t\\t);\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tcuchubal.participantesRegistrados < cuchubal.numParticipantes,\\r\\n\\t\\t\\t\\\"Cuchubal is full\\\"\\r\\n\\t\\t);\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tmsg.value == cuchubal.montoPorRonda,\\r\\n\\t\\t\\t\\\"Payment must be equal to montoPorRonda\\\"\\r\\n\\t\\t);\\r\\n\\r\\n\\t\\tcuchubal.participants[msg.sender] = Participant({\\r\\n\\t\\t\\thasPaid: true,\\r\\n\\t\\t\\thasJoined: true,\\r\\n\\t\\t\\ttotalPaid: msg.value\\r\\n\\t\\t});\\r\\n\\r\\n\\t\\tcuchubal.participantesRegistrados++;\\r\\n\\t\\tcuchubal.participantesPagados++;\\r\\n\\t\\tcuchubal.participantIndex[cuchubal.participantesPagados] = msg.sender;\\r\\n\\r\\n\\t\\temit ParticipantJoined(codigo, msg.sender);\\r\\n\\t\\temit PaymentMade(codigo, msg.sender, msg.value);\\r\\n\\r\\n\\t\\tif (cuchubal.participantesPagados == cuchubal.numParticipantes) {\\r\\n\\t\\t\\tdistributePayment(codigo);\\r\\n\\t\\t}\\r\\n\\t}\\r\\n\\r\\n\\tfunction payForNextRound(string memory codigo) public payable {\\r\\n\\t\\tCuchubal storage cuchubal = cuchubales[codigo];\\r\\n\\t\\t//require(cuchubal.rondaActual > 1, \\\"Next round payments not started yet\\\");\\r\\n\\t\\trequire(cuchubal.rondaActual != 1, \\\"Cannot pay for the next round yet\\\");\\r\\n\\t\\trequire(\\r\\n\\t\\t\\t!cuchubal.participants[msg.sender].hasPaid,\\r\\n\\t\\t\\t\\\"You have already paid for this round\\\"\\r\\n\\t\\t);\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tcuchubal.numParticipantes != cuchubal.rondaActual,\\r\\n\\t\\t\\t\\\"Cuchulink has finished\\\"\\r\\n\\t\\t);\\r\\n\\t\\trequire(\\r\\n\\t\\t\\tmsg.value == cuchubal.montoPorRonda,\\r\\n\\t\\t\\t\\\"Payment must be equal to montoPorRonda\\\"\\r\\n\\t\\t);\\r\\n\\r\\n\\t\\tcuchubal.participants[msg.sender].hasPaid = true;\\r\\n\\t\\tcuchubal.participants[msg.sender].totalPaid += msg.value;\\r\\n\\t\\tcuchubal.participantesPagados++;\\r\\n\\r\\n\\t\\temit PaymentMade(codigo, msg.sender, msg.value);\\r\\n\\r\\n\\t\\tif (cuchubal.participantesPagados == cuchubal.numParticipantes) {\\r\\n\\t\\t\\tdistributePayment(codigo);\\r\\n\\t\\t}\\r\\n\\t}\\r\\n\\r\\n\\tfunction distributePayment(string memory codigo) private {\\r\\n        Cuchubal storage cuchubal = cuchubales[codigo];\\r\\n        uint256 totalAmount = cuchubal.montoPorRonda * cuchubal.numParticipantes;\\r\\n\\r\\n        if (cuchubal.participantesPagados == cuchubal.numParticipantes) {\\r\\n\\r\\n            address winner = selectWinner(cuchubal);\\r\\n\\r\\n            (bool success,) = payable(winner).call{value: totalAmount}(\\\"\\\");\\r\\n            require(success, \\\"Transfer failed.\\\");\\r\\n\\r\\n            cuchubal.rounds[cuchubal.rondaActual] = Round({winner: winner, hasWinner: true});\\r\\n            emit RoundCompleted(codigo, cuchubal.rondaActual, winner);\\r\\n\\r\\n            for (uint256 i = 1; i <= cuchubal.numParticipantes; i++) {\\r\\n                address participantAddr = cuchubal.participantIndex[i];\\r\\n                cuchubal.participants[participantAddr].hasPaid = false;\\r\\n            }\\r\\n\\r\\n            cuchubal.participantesPagados = 0;\\r\\n\\r\\n            if (cuchubal.rondaActual < cuchubal.numParticipantes) {\\r\\n                cuchubal.rondaActual++;\\r\\n            } else {\\r\\n                cuchubal.finished = true;\\r\\n            }\\r\\n        }\\r\\n    }\\r\\n\\r\\n\\r\\n    function hasParticipantWonBefore(Cuchubal storage cuchubal, address participant) private view returns (bool) {\\r\\n        for (uint256 i = 1; i < cuchubal.rondaActual; i++) {\\r\\n            if (cuchubal.rounds[i].winner == participant) {\\r\\n                return true;\\r\\n            }\\r\\n        }\\r\\n        return false;\\r\\n    }\\r\\n\\r\\n    function selectWinner(Cuchubal storage cuchubal) private view returns (address) {\\r\\n        bool winnerFound = false;\\r\\n        address winner;\\r\\n\\r\\n        while (!winnerFound) {\\r\\n            // Seleccionar un ganador aleatorio\\r\\n            uint256 randIndex =\\r\\n                uint256(keccak256(abi.encodePacked(block.timestamp, block.difficulty))) % cuchubal.numParticipantes;\\r\\n            address potentialWinner = cuchubal.participantIndex[randIndex + 1]; \\r\\n\\r\\n            if (!hasParticipantWonBefore(cuchubal, potentialWinner)) {\\r\\n                winner = potentialWinner;\\r\\n                winnerFound = true;\\r\\n            }\\r\\n        }\\r\\n\\r\\n        return winner;\\r\\n    }\\r\\n\\r\\n\\tfunction getCuchubalesByCreator(\\r\\n\\t\\taddress creator\\r\\n\\t) public view returns (string[] memory) {\\r\\n\\t\\treturn creatorToCuchubales[creator];\\r\\n\\t}\\r\\n\\r\\n\\tfunction getCuchubalInfo(\\r\\n\\t\\tstring memory codigo\\r\\n\\t)\\r\\n\\t\\tpublic\\r\\n\\t\\tview\\r\\n\\t\\treturns (\\r\\n\\t\\t\\tstring memory nombre,\\r\\n\\t\\t\\tuint256 montoPorRonda,\\r\\n\\t\\t\\tuint256 numParticipantes,\\r\\n\\t\\t\\tuint256 rondaActual,\\r\\n\\t\\t\\tbool finished\\r\\n\\t\\t)\\r\\n\\t{\\r\\n\\t\\tCuchubal storage cuchubal = cuchubales[codigo];\\r\\n\\t\\treturn (\\r\\n\\t\\t\\tcuchubal.nombre,\\r\\n\\t\\t\\tcuchubal.montoPorRonda,\\r\\n\\t\\t\\tcuchubal.numParticipantes,\\r\\n\\t\\t\\tcuchubal.rondaActual,\\r\\n\\t\\t\\tcuchubal.finished\\r\\n\\t\\t);\\r\\n\\t}\\r\\n\\r\\n\\tfunction getParticipantsPaid(\\r\\n\\t\\tstring memory codigo\\r\\n\\t) public view returns (address[] memory, Participant[] memory) {\\r\\n\\t\\tCuchubal storage cuchubal = cuchubales[codigo];\\r\\n\\t\\taddress[] memory addresses = new address[](\\r\\n\\t\\t\\tcuchubal.participantesPagados\\r\\n\\t\\t);\\r\\n\\t\\tParticipant[] memory participants = new Participant[](\\r\\n\\t\\t\\tcuchubal.participantesPagados\\r\\n\\t\\t);\\r\\n\\t\\tfor (uint256 i = 1; i <= cuchubal.participantesPagados; i++) {\\r\\n\\t\\t\\taddress participantAddr = cuchubal.participantIndex[i];\\r\\n\\t\\t\\taddresses[i - 1] = participantAddr;\\r\\n\\t\\t\\tparticipants[i - 1] = cuchubal.participants[participantAddr];\\r\\n\\t\\t}\\r\\n\\t\\treturn (addresses, participants);\\r\\n\\t}\\r\\n\\r\\n\\tfunction getParticipants(\\r\\n\\t\\tstring memory codigo\\r\\n\\t) public view returns (address[] memory, Participant[] memory) {\\r\\n\\t\\tCuchubal storage cuchubal = cuchubales[codigo];\\r\\n\\t\\tuint256 totalParticipants = cuchubal.numParticipantes;\\r\\n\\r\\n\\t\\taddress[] memory addresses = new address[](totalParticipants);\\r\\n\\t\\tParticipant[] memory participants = new Participant[](\\r\\n\\t\\t\\ttotalParticipants\\r\\n\\t\\t);\\r\\n\\r\\n\\t\\tfor (uint256 i = 1; i <= totalParticipants; i++) {\\r\\n\\t\\t\\taddress participantAddr = cuchubal.participantIndex[i];\\r\\n\\t\\t\\taddresses[i - 1] = participantAddr;\\r\\n\\t\\t\\tparticipants[i - 1] = cuchubal.participants[participantAddr];\\r\\n\\t\\t}\\r\\n\\r\\n\\t\\treturn (addresses, participants);\\r\\n\\t}\\r\\n\\r\\n\\tfunction getRoundHistory(\\r\\n\\t\\tstring memory codigo\\r\\n\\t) public view returns (Round[] memory) {\\r\\n\\t\\tCuchubal storage cuchubal = cuchubales[codigo];\\r\\n\\t\\tRound[] memory rounds = new Round[](cuchubal.rondaActual);\\r\\n\\t\\tfor (uint256 i = 1; i <= cuchubal.rondaActual; i++) {\\r\\n\\t\\t\\trounds[i - 1] = cuchubal.rounds[i];\\r\\n\\t\\t}\\r\\n\\t\\treturn rounds;\\r\\n\\t}\\r\\n}\\r\\n\",\"keccak256\":\"0xba202e9bbadc15765464bf7e761d543687db4829bfc4799713c649d89b3957a8\",\"license\":\"MIT\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b506118f0806100206000396000f3fe60806040526004361061007b5760003560e01c80637e90def71161004e5780637e90def71461010b578063bf33266c14610139578063ed19d0821461016a578063f8803a0d1461018a57600080fd5b806323ec25b61461008057806344d0f635146100b657806355c89ba6146100cb57806374c99270146100f8575b600080fd5b34801561008c57600080fd5b506100a061009b3660046112d6565b61019d565b6040516100ad9190611313565b60405180910390f35b6100c96100c43660046112d6565b6102b0565b005b3480156100d757600080fd5b506100eb6100e636600461136d565b6104b7565b6040516100ad91906113e6565b6100c9610106366004611448565b6105a6565b34801561011757600080fd5b5061012b6101263660046112d6565b61084b565b6040516100ad9291906114bf565b34801561014557600080fd5b506101596101543660046112d6565b610a10565b6040516100ad95949392919061155c565b34801561017657600080fd5b5061012b6101853660046112d6565b610afe565b6100c96101983660046112d6565b610cc7565b6060600080836040516101b09190611595565b908152602001604051809103902090506000816003015467ffffffffffffffff8111156101df576101df611233565b60405190808252806020026020018201604052801561022457816020015b60408051808201909152600080825260208201528152602001906001900390816101fd5790505b50905060015b826003015481116102a85760008181526008840160209081526040918290208251808401909352546001600160a01b0381168352600160a01b900460ff161515908201528261027a6001846115c7565b8151811061028a5761028a6115da565b602002602001018190525080806102a0906115f0565b91505061022a565b509392505050565b600080826040516102c19190611595565b9081526020016040518091039020905080600301546001036103345760405162461bcd60e51b815260206004820152602160248201527f43616e6e6f742070617920666f7220746865206e65787420726f756e642079656044820152601d60fa1b60648201526084015b60405180910390fd5b33600090815260078201602052604090205460ff16156103a25760405162461bcd60e51b8152602060048201526024808201527f596f75206861766520616c7265616479207061696420666f72207468697320726044820152631bdd5b9960e21b606482015260840161032b565b80600301548160020154036103f25760405162461bcd60e51b815260206004820152601660248201527510dd58da1d5b1a5b9ac81a185cc8199a5b9a5cda195960521b604482015260640161032b565b806001015434146104155760405162461bcd60e51b815260040161032b90611609565b3360009081526007820160205260408120805460ff19166001908117825501805434929061044490849061164f565b909155505060048101805490600061045b836115f0565b91905055507fa4063949d46df8966b0b0da701810cd0898aa91bbd685924f99e15a878b5b9c782333460405161049393929190611662565b60405180910390a180600201548160040154036104b3576104b382610f16565b5050565b6001600160a01b0381166000908152600160209081526040808320805482518185028101850190935280835260609492939192909184015b8282101561059b57838290600052602060002001805461050e90611690565b80601f016020809104026020016040519081016040528092919081815260200182805461053a90611690565b80156105875780601f1061055c57610100808354040283529160200191610587565b820191906000526020600020905b81548152906001019060200180831161056a57829003601f168201915b5050505050815260200190600101906104ef565b505050509050919050565b6000816040516105b69190611595565b9081526040519081900360200190206006015460ff16156106285760405162461bcd60e51b815260206004820152602660248201527f437563687562616c2077697468207468697320636f646520616c72656164792060448201526565786973747360d01b606482015260840161032b565b82341461068e5760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c207061796d656e74206d75737420626520657175616c20746f60448201526d206d6f6e746f506f72526f6e646160901b606482015260840161032b565b6000808260405161069f9190611595565b9081526040519081900360200190209050806106bb8682611718565b5060068101805461ffff19166001908117909155818101859055600280830185905560038301828155600484018381556040805160608101825285815234602080830191825282840188815233600081815260078c0184528681209551865490151560ff199182161787559451868c01559151949098018054941515949093169390931790915582518084018452828152808201838152955483526008890182528383209051815496511515600160a01b026001600160a81b03199097166001600160a01b039190911617959095179094559154825260098601835280822080546001600160a01b031916851790559281528382529182208054938401815582529020016107c98382611718565b507fd05d6af734058276ecf7c46d68e4239cf09921f5f097ae72f7e708f8e4a88b2c82868686336040516108019594939291906117d8565b60405180910390a17fa4063949d46df8966b0b0da701810cd0898aa91bbd685924f99e15a878b5b9c782333460405161083c93929190611662565b60405180910390a15050505050565b6060806000808460405161085f9190611595565b908152604051908190036020019020600281015490915060008167ffffffffffffffff81111561089157610891611233565b6040519080825280602002602001820160405280156108ba578160200160208202803683370190505b50905060008267ffffffffffffffff8111156108d8576108d8611233565b60405190808252806020026020018201604052801561092357816020015b60408051606081018252600080825260208083018290529282015282526000199092019101816108f65790505b50905060015b838111610a035760008181526009860160205260409020546001600160a01b031680846109576001856115c7565b81518110610967576109676115da565b6001600160a01b0392831660209182029290920181019190915290821660009081526007880182526040908190208151606081018352815460ff90811615158252600180840154958301959095526002909201549091161515918101919091529084906109d490856115c7565b815181106109e4576109e46115da565b60200260200101819052505080806109fb906115f0565b915050610929565b5090969095509350505050565b606060008060008060008087604051610a299190611595565b90815260200160405180910390209050806000018160010154826002015483600301548460060160019054906101000a900460ff16848054610a6a90611690565b80601f0160208091040260200160405190810160405280929190818152602001828054610a9690611690565b8015610ae35780601f10610ab857610100808354040283529160200191610ae3565b820191906000526020600020905b815481529060010190602001808311610ac657829003601f168201915b50505050509450955095509550955095505091939590929450565b60608060008084604051610b129190611595565b908152602001604051809103902090506000816004015467ffffffffffffffff811115610b4157610b41611233565b604051908082528060200260200182016040528015610b6a578160200160208202803683370190505b5090506000826004015467ffffffffffffffff811115610b8c57610b8c611233565b604051908082528060200260200182016040528015610bd757816020015b6040805160608101825260008082526020808301829052928201528252600019909201910181610baa5790505b50905060015b83600401548111610cbb5760008181526009850160205260409020546001600160a01b03168084610c0f6001856115c7565b81518110610c1f57610c1f6115da565b6001600160a01b0392831660209182029290920181019190915290821660009081526007870182526040908190208151606081018352815460ff9081161515825260018084015495830195909552600290920154909116151591810191909152908490610c8c90856115c7565b81518110610c9c57610c9c6115da565b6020026020010181905250508080610cb3906115f0565b915050610bdd565b50909590945092505050565b60008082604051610cd89190611595565b908152604080516020928190038301902033600090815260078201909352912060028101549192509060ff1615610d655760405162461bcd60e51b815260206004820152602b60248201527f596f752061726520616c7265616479207265676973746572656420696e20746860448201526a1a5cc810dd58da1d58985b60aa1b606482015260840161032b565b8160020154826005015410610daf5760405162461bcd60e51b815260206004820152601060248201526f10dd58da1d58985b081a5cc8199d5b1b60821b604482015260640161032b565b81600101543414610dd25760405162461bcd60e51b815260040161032b90611609565b604080516060810182526001808252346020808401918252838501838152336000908152600789019092529481209351845490151560ff19918216178555915192840192909255925160029092018054921515929093169190911790915560058301805491610e40836115f0565b9091555050600482018054906000610e57836115f0565b9091555050600482015460009081526009830160205260409081902080546001600160a01b0319163390811790915590517f227b03c0487241b05aa32a4755fd8e275bd1823d9b9f6a8e994c22f93ed6cad391610eb691869190611824565b60405180910390a17fa4063949d46df8966b0b0da701810cd0898aa91bbd685924f99e15a878b5b9c7833334604051610ef193929190611662565b60405180910390a18160020154826004015403610f1157610f1183610f16565b505050565b60008082604051610f279190611595565b90815260200160405180910390209050600081600201548260010154610f4d919061184e565b90508160020154826004015403610f11576000610f6983611133565b90506000816001600160a01b03168360405160006040518083038185875af1925050503d8060008114610fb8576040519150601f19603f3d011682016040523d82523d6000602084013e610fbd565b606091505b50509050806110015760405162461bcd60e51b815260206004820152601060248201526f2a3930b739b332b9103330b4b632b21760811b604482015260640161032b565b6040805180820182526001600160a01b03808516825260016020808401918252600389018054600090815260088b01909252908590209351845492511515600160a01b026001600160a81b0319909316931692909217179091555490517ff1d3894a73f00c3e4d01f9ad609edccef0e075866b1e25535e4e338bd7a373a09161108e918891908690611865565b60405180910390a160015b846002015481116110e65760008181526009860160209081526040808320546001600160a01b03168352600788019091529020805460ff19169055806110de816115f0565b915050611099565b506000600485015560028401546003850154101561111a57600384018054906000611110836115f0565b919050555061112c565b60068401805461ff0019166101001790555b5050505050565b600080805b816111d057600084600201544244604051602001611160929190918252602082015260400190565b6040516020818303038152906040528051906020012060001c6111839190611898565b90506000600986018161119784600161164f565b81526020810191909152604001600020546001600160a01b031690506111bd86826111d7565b6111c957809250600193505b5050611138565b9392505050565b600060015b83600301548110156112275760008181526008850160205260409020546001600160a01b0380851691160361121557600191505061122d565b8061121f816115f0565b9150506111dc565b50600090505b92915050565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261125a57600080fd5b813567ffffffffffffffff8082111561127557611275611233565b604051601f8301601f19908116603f0116810190828211818310171561129d5761129d611233565b816040528381528660208588010111156112b657600080fd5b836020870160208301376000602085830101528094505050505092915050565b6000602082840312156112e857600080fd5b813567ffffffffffffffff8111156112ff57600080fd5b61130b84828501611249565b949350505050565b602080825282518282018190526000919060409081850190868401855b8281101561136057815180516001600160a01b031685528601511515868501529284019290850190600101611330565b5091979650505050505050565b60006020828403121561137f57600080fd5b81356001600160a01b03811681146111d057600080fd5b60005b838110156113b1578181015183820152602001611399565b50506000910152565b600081518084526113d2816020860160208601611396565b601f01601f19169290920160200192915050565b6000602080830181845280855180835260408601915060408160051b870101925083870160005b8281101561143b57603f198886030184526114298583516113ba565b9450928501929085019060010161140d565b5092979650505050505050565b6000806000806080858703121561145e57600080fd5b843567ffffffffffffffff8082111561147657600080fd5b61148288838901611249565b9550602087013594506040870135935060608701359150808211156114a657600080fd5b506114b387828801611249565b91505092959194509250565b6040808252835182820181905260009190606090818501906020808901865b838110156115035781516001600160a01b0316855293820193908201906001016114de565b5050868303818801528751808452888201938201925060005b8181101561154d5784518051151585528381015184860152870151151587850152938201939285019260010161151c565b50919998505050505050505050565b60a08152600061156f60a08301886113ba565b905085602083015284604083015283606083015282151560808301529695505050505050565b600082516115a7818460208701611396565b9190910192915050565b634e487b7160e01b600052601160045260246000fd5b8181038181111561122d5761122d6115b1565b634e487b7160e01b600052603260045260246000fd5b600060018201611602576116026115b1565b5060010190565b60208082526026908201527f5061796d656e74206d75737420626520657175616c20746f206d6f6e746f506f60408201526572526f6e646160d01b606082015260800190565b8082018082111561122d5761122d6115b1565b60608152600061167560608301866113ba565b6001600160a01b039490941660208301525060400152919050565b600181811c908216806116a457607f821691505b6020821081036116c457634e487b7160e01b600052602260045260246000fd5b50919050565b601f821115610f1157600081815260208120601f850160051c810160208610156116f15750805b601f850160051c820191505b81811015611710578281556001016116fd565b505050505050565b815167ffffffffffffffff81111561173257611732611233565b611746816117408454611690565b846116ca565b602080601f83116001811461177b57600084156117635750858301515b600019600386901b1c1916600185901b178555611710565b600085815260208120601f198616915b828110156117aa5788860151825594840194600190910190840161178b565b50858210156117c85787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b60a0815260006117eb60a08301886113ba565b82810360208401526117fd81886113ba565b6040840196909652505060608101929092526001600160a01b031660809091015292915050565b60408152600061183760408301856113ba565b905060018060a01b03831660208301529392505050565b808202811582820484141761122d5761122d6115b1565b60608152600061187860608301866113ba565b6020830194909452506001600160a01b0391909116604090910152919050565b6000826118b557634e487b7160e01b600052601260045260246000fd5b50069056fea264697066735822122051079d1ade6c53f49a9b9f9b926a8aeeda5be532a750c0ef45b56e4fad31d6a464736f6c63430008110033",
+  "deployedBytecode": "0x60806040526004361061007b5760003560e01c80637e90def71161004e5780637e90def71461010b578063bf33266c14610139578063ed19d0821461016a578063f8803a0d1461018a57600080fd5b806323ec25b61461008057806344d0f635146100b657806355c89ba6146100cb57806374c99270146100f8575b600080fd5b34801561008c57600080fd5b506100a061009b3660046112d6565b61019d565b6040516100ad9190611313565b60405180910390f35b6100c96100c43660046112d6565b6102b0565b005b3480156100d757600080fd5b506100eb6100e636600461136d565b6104b7565b6040516100ad91906113e6565b6100c9610106366004611448565b6105a6565b34801561011757600080fd5b5061012b6101263660046112d6565b61084b565b6040516100ad9291906114bf565b34801561014557600080fd5b506101596101543660046112d6565b610a10565b6040516100ad95949392919061155c565b34801561017657600080fd5b5061012b6101853660046112d6565b610afe565b6100c96101983660046112d6565b610cc7565b6060600080836040516101b09190611595565b908152602001604051809103902090506000816003015467ffffffffffffffff8111156101df576101df611233565b60405190808252806020026020018201604052801561022457816020015b60408051808201909152600080825260208201528152602001906001900390816101fd5790505b50905060015b826003015481116102a85760008181526008840160209081526040918290208251808401909352546001600160a01b0381168352600160a01b900460ff161515908201528261027a6001846115c7565b8151811061028a5761028a6115da565b602002602001018190525080806102a0906115f0565b91505061022a565b509392505050565b600080826040516102c19190611595565b9081526020016040518091039020905080600301546001036103345760405162461bcd60e51b815260206004820152602160248201527f43616e6e6f742070617920666f7220746865206e65787420726f756e642079656044820152601d60fa1b60648201526084015b60405180910390fd5b33600090815260078201602052604090205460ff16156103a25760405162461bcd60e51b8152602060048201526024808201527f596f75206861766520616c7265616479207061696420666f72207468697320726044820152631bdd5b9960e21b606482015260840161032b565b80600301548160020154036103f25760405162461bcd60e51b815260206004820152601660248201527510dd58da1d5b1a5b9ac81a185cc8199a5b9a5cda195960521b604482015260640161032b565b806001015434146104155760405162461bcd60e51b815260040161032b90611609565b3360009081526007820160205260408120805460ff19166001908117825501805434929061044490849061164f565b909155505060048101805490600061045b836115f0565b91905055507fa4063949d46df8966b0b0da701810cd0898aa91bbd685924f99e15a878b5b9c782333460405161049393929190611662565b60405180910390a180600201548160040154036104b3576104b382610f16565b5050565b6001600160a01b0381166000908152600160209081526040808320805482518185028101850190935280835260609492939192909184015b8282101561059b57838290600052602060002001805461050e90611690565b80601f016020809104026020016040519081016040528092919081815260200182805461053a90611690565b80156105875780601f1061055c57610100808354040283529160200191610587565b820191906000526020600020905b81548152906001019060200180831161056a57829003601f168201915b5050505050815260200190600101906104ef565b505050509050919050565b6000816040516105b69190611595565b9081526040519081900360200190206006015460ff16156106285760405162461bcd60e51b815260206004820152602660248201527f437563687562616c2077697468207468697320636f646520616c72656164792060448201526565786973747360d01b606482015260840161032b565b82341461068e5760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c207061796d656e74206d75737420626520657175616c20746f60448201526d206d6f6e746f506f72526f6e646160901b606482015260840161032b565b6000808260405161069f9190611595565b9081526040519081900360200190209050806106bb8682611718565b5060068101805461ffff19166001908117909155818101859055600280830185905560038301828155600484018381556040805160608101825285815234602080830191825282840188815233600081815260078c0184528681209551865490151560ff199182161787559451868c01559151949098018054941515949093169390931790915582518084018452828152808201838152955483526008890182528383209051815496511515600160a01b026001600160a81b03199097166001600160a01b039190911617959095179094559154825260098601835280822080546001600160a01b031916851790559281528382529182208054938401815582529020016107c98382611718565b507fd05d6af734058276ecf7c46d68e4239cf09921f5f097ae72f7e708f8e4a88b2c82868686336040516108019594939291906117d8565b60405180910390a17fa4063949d46df8966b0b0da701810cd0898aa91bbd685924f99e15a878b5b9c782333460405161083c93929190611662565b60405180910390a15050505050565b6060806000808460405161085f9190611595565b908152604051908190036020019020600281015490915060008167ffffffffffffffff81111561089157610891611233565b6040519080825280602002602001820160405280156108ba578160200160208202803683370190505b50905060008267ffffffffffffffff8111156108d8576108d8611233565b60405190808252806020026020018201604052801561092357816020015b60408051606081018252600080825260208083018290529282015282526000199092019101816108f65790505b50905060015b838111610a035760008181526009860160205260409020546001600160a01b031680846109576001856115c7565b81518110610967576109676115da565b6001600160a01b0392831660209182029290920181019190915290821660009081526007880182526040908190208151606081018352815460ff90811615158252600180840154958301959095526002909201549091161515918101919091529084906109d490856115c7565b815181106109e4576109e46115da565b60200260200101819052505080806109fb906115f0565b915050610929565b5090969095509350505050565b606060008060008060008087604051610a299190611595565b90815260200160405180910390209050806000018160010154826002015483600301548460060160019054906101000a900460ff16848054610a6a90611690565b80601f0160208091040260200160405190810160405280929190818152602001828054610a9690611690565b8015610ae35780601f10610ab857610100808354040283529160200191610ae3565b820191906000526020600020905b815481529060010190602001808311610ac657829003601f168201915b50505050509450955095509550955095505091939590929450565b60608060008084604051610b129190611595565b908152602001604051809103902090506000816004015467ffffffffffffffff811115610b4157610b41611233565b604051908082528060200260200182016040528015610b6a578160200160208202803683370190505b5090506000826004015467ffffffffffffffff811115610b8c57610b8c611233565b604051908082528060200260200182016040528015610bd757816020015b6040805160608101825260008082526020808301829052928201528252600019909201910181610baa5790505b50905060015b83600401548111610cbb5760008181526009850160205260409020546001600160a01b03168084610c0f6001856115c7565b81518110610c1f57610c1f6115da565b6001600160a01b0392831660209182029290920181019190915290821660009081526007870182526040908190208151606081018352815460ff9081161515825260018084015495830195909552600290920154909116151591810191909152908490610c8c90856115c7565b81518110610c9c57610c9c6115da565b6020026020010181905250508080610cb3906115f0565b915050610bdd565b50909590945092505050565b60008082604051610cd89190611595565b908152604080516020928190038301902033600090815260078201909352912060028101549192509060ff1615610d655760405162461bcd60e51b815260206004820152602b60248201527f596f752061726520616c7265616479207265676973746572656420696e20746860448201526a1a5cc810dd58da1d58985b60aa1b606482015260840161032b565b8160020154826005015410610daf5760405162461bcd60e51b815260206004820152601060248201526f10dd58da1d58985b081a5cc8199d5b1b60821b604482015260640161032b565b81600101543414610dd25760405162461bcd60e51b815260040161032b90611609565b604080516060810182526001808252346020808401918252838501838152336000908152600789019092529481209351845490151560ff19918216178555915192840192909255925160029092018054921515929093169190911790915560058301805491610e40836115f0565b9091555050600482018054906000610e57836115f0565b9091555050600482015460009081526009830160205260409081902080546001600160a01b0319163390811790915590517f227b03c0487241b05aa32a4755fd8e275bd1823d9b9f6a8e994c22f93ed6cad391610eb691869190611824565b60405180910390a17fa4063949d46df8966b0b0da701810cd0898aa91bbd685924f99e15a878b5b9c7833334604051610ef193929190611662565b60405180910390a18160020154826004015403610f1157610f1183610f16565b505050565b60008082604051610f279190611595565b90815260200160405180910390209050600081600201548260010154610f4d919061184e565b90508160020154826004015403610f11576000610f6983611133565b90506000816001600160a01b03168360405160006040518083038185875af1925050503d8060008114610fb8576040519150601f19603f3d011682016040523d82523d6000602084013e610fbd565b606091505b50509050806110015760405162461bcd60e51b815260206004820152601060248201526f2a3930b739b332b9103330b4b632b21760811b604482015260640161032b565b6040805180820182526001600160a01b03808516825260016020808401918252600389018054600090815260088b01909252908590209351845492511515600160a01b026001600160a81b0319909316931692909217179091555490517ff1d3894a73f00c3e4d01f9ad609edccef0e075866b1e25535e4e338bd7a373a09161108e918891908690611865565b60405180910390a160015b846002015481116110e65760008181526009860160209081526040808320546001600160a01b03168352600788019091529020805460ff19169055806110de816115f0565b915050611099565b506000600485015560028401546003850154101561111a57600384018054906000611110836115f0565b919050555061112c565b60068401805461ff0019166101001790555b5050505050565b600080805b816111d057600084600201544244604051602001611160929190918252602082015260400190565b6040516020818303038152906040528051906020012060001c6111839190611898565b90506000600986018161119784600161164f565b81526020810191909152604001600020546001600160a01b031690506111bd86826111d7565b6111c957809250600193505b5050611138565b9392505050565b600060015b83600301548110156112275760008181526008850160205260409020546001600160a01b0380851691160361121557600191505061122d565b8061121f816115f0565b9150506111dc565b50600090505b92915050565b634e487b7160e01b600052604160045260246000fd5b600082601f83011261125a57600080fd5b813567ffffffffffffffff8082111561127557611275611233565b604051601f8301601f19908116603f0116810190828211818310171561129d5761129d611233565b816040528381528660208588010111156112b657600080fd5b836020870160208301376000602085830101528094505050505092915050565b6000602082840312156112e857600080fd5b813567ffffffffffffffff8111156112ff57600080fd5b61130b84828501611249565b949350505050565b602080825282518282018190526000919060409081850190868401855b8281101561136057815180516001600160a01b031685528601511515868501529284019290850190600101611330565b5091979650505050505050565b60006020828403121561137f57600080fd5b81356001600160a01b03811681146111d057600080fd5b60005b838110156113b1578181015183820152602001611399565b50506000910152565b600081518084526113d2816020860160208601611396565b601f01601f19169290920160200192915050565b6000602080830181845280855180835260408601915060408160051b870101925083870160005b8281101561143b57603f198886030184526114298583516113ba565b9450928501929085019060010161140d565b5092979650505050505050565b6000806000806080858703121561145e57600080fd5b843567ffffffffffffffff8082111561147657600080fd5b61148288838901611249565b9550602087013594506040870135935060608701359150808211156114a657600080fd5b506114b387828801611249565b91505092959194509250565b6040808252835182820181905260009190606090818501906020808901865b838110156115035781516001600160a01b0316855293820193908201906001016114de565b5050868303818801528751808452888201938201925060005b8181101561154d5784518051151585528381015184860152870151151587850152938201939285019260010161151c565b50919998505050505050505050565b60a08152600061156f60a08301886113ba565b905085602083015284604083015283606083015282151560808301529695505050505050565b600082516115a7818460208701611396565b9190910192915050565b634e487b7160e01b600052601160045260246000fd5b8181038181111561122d5761122d6115b1565b634e487b7160e01b600052603260045260246000fd5b600060018201611602576116026115b1565b5060010190565b60208082526026908201527f5061796d656e74206d75737420626520657175616c20746f206d6f6e746f506f60408201526572526f6e646160d01b606082015260800190565b8082018082111561122d5761122d6115b1565b60608152600061167560608301866113ba565b6001600160a01b039490941660208301525060400152919050565b600181811c908216806116a457607f821691505b6020821081036116c457634e487b7160e01b600052602260045260246000fd5b50919050565b601f821115610f1157600081815260208120601f850160051c810160208610156116f15750805b601f850160051c820191505b81811015611710578281556001016116fd565b505050505050565b815167ffffffffffffffff81111561173257611732611233565b611746816117408454611690565b846116ca565b602080601f83116001811461177b57600084156117635750858301515b600019600386901b1c1916600185901b178555611710565b600085815260208120601f198616915b828110156117aa5788860151825594840194600190910190840161178b565b50858210156117c85787850151600019600388901b60f8161c191681555b5050505050600190811b01905550565b60a0815260006117eb60a08301886113ba565b82810360208401526117fd81886113ba565b6040840196909652505060608101929092526001600160a01b031660809091015292915050565b60408152600061183760408301856113ba565b905060018060a01b03831660208301529392505050565b808202811582820484141761122d5761122d6115b1565b60608152600061187860608301866113ba565b6020830194909452506001600160a01b0391909116604090910152919050565b6000826118b557634e487b7160e01b600052601260045260246000fd5b50069056fea264697066735822122051079d1ade6c53f49a9b9f9b926a8aeeda5be532a750c0ef45b56e4fad31d6a464736f6c63430008110033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {},
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {},
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 49,
+        "contract": "contracts/Cuchulink.sol:Cuchulink",
+        "label": "cuchubales",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_string_memory_ptr,t_struct(Cuchubal)44_storage)"
+      },
+      {
+        "astId": 54,
+        "contract": "contracts/Cuchulink.sol:Cuchulink",
+        "label": "creatorToCuchubales",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_mapping(t_address,t_array(t_string_storage)dyn_storage)"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_string_storage)dyn_storage": {
+        "base": "t_string_storage",
+        "encoding": "dynamic_array",
+        "label": "string[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_array(t_string_storage)dyn_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => string[])",
+        "numberOfBytes": "32",
+        "value": "t_array(t_string_storage)dyn_storage"
+      },
+      "t_mapping(t_address,t_struct(Participant)8_storage)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => struct Cuchulink.Participant)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Participant)8_storage"
+      },
+      "t_mapping(t_string_memory_ptr,t_struct(Cuchubal)44_storage)": {
+        "encoding": "mapping",
+        "key": "t_string_memory_ptr",
+        "label": "mapping(string => struct Cuchulink.Cuchubal)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Cuchubal)44_storage"
+      },
+      "t_mapping(t_uint256,t_address)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => address)",
+        "numberOfBytes": "32",
+        "value": "t_address"
+      },
+      "t_mapping(t_uint256,t_struct(Round)13_storage)": {
+        "encoding": "mapping",
+        "key": "t_uint256",
+        "label": "mapping(uint256 => struct Cuchulink.Round)",
+        "numberOfBytes": "32",
+        "value": "t_struct(Round)13_storage"
+      },
+      "t_string_memory_ptr": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_string_storage": {
+        "encoding": "bytes",
+        "label": "string",
+        "numberOfBytes": "32"
+      },
+      "t_struct(Cuchubal)44_storage": {
+        "encoding": "inplace",
+        "label": "struct Cuchulink.Cuchubal",
+        "members": [
+          {
+            "astId": 15,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "nombre",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_string_storage"
+          },
+          {
+            "astId": 17,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "montoPorRonda",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 19,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "numParticipantes",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 21,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "rondaActual",
+            "offset": 0,
+            "slot": "3",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 23,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "participantesPagados",
+            "offset": 0,
+            "slot": "4",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 25,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "participantesRegistrados",
+            "offset": 0,
+            "slot": "5",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 27,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "exists",
+            "offset": 0,
+            "slot": "6",
+            "type": "t_bool"
+          },
+          {
+            "astId": 29,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "finished",
+            "offset": 1,
+            "slot": "6",
+            "type": "t_bool"
+          },
+          {
+            "astId": 34,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "participants",
+            "offset": 0,
+            "slot": "7",
+            "type": "t_mapping(t_address,t_struct(Participant)8_storage)"
+          },
+          {
+            "astId": 39,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "rounds",
+            "offset": 0,
+            "slot": "8",
+            "type": "t_mapping(t_uint256,t_struct(Round)13_storage)"
+          },
+          {
+            "astId": 43,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "participantIndex",
+            "offset": 0,
+            "slot": "9",
+            "type": "t_mapping(t_uint256,t_address)"
+          }
+        ],
+        "numberOfBytes": "320"
+      },
+      "t_struct(Participant)8_storage": {
+        "encoding": "inplace",
+        "label": "struct Cuchulink.Participant",
+        "members": [
+          {
+            "astId": 3,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "hasPaid",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_bool"
+          },
+          {
+            "astId": 5,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "totalPaid",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          },
+          {
+            "astId": 7,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "hasJoined",
+            "offset": 0,
+            "slot": "2",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "96"
+      },
+      "t_struct(Round)13_storage": {
+        "encoding": "inplace",
+        "label": "struct Cuchulink.Round",
+        "members": [
+          {
+            "astId": 10,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "winner",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 12,
+            "contract": "contracts/Cuchulink.sol:Cuchulink",
+            "label": "hasWinner",
+            "offset": 20,
+            "slot": "0",
+            "type": "t_bool"
+          }
+        ],
+        "numberOfBytes": "32"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}
