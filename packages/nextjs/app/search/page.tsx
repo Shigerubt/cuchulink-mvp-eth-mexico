@@ -51,7 +51,7 @@ const Search: NextPage = () => {
             type="text"
             {...register("codigo")}
             placeholder="Escriba su Código de Cuchubal"
-            className="border border-gray-300 bg-gray-200 p-2 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+            className="border border-gray-300 bg-gray-200 p-2 rounded-lg text-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400"
             required
           />
         </div>
